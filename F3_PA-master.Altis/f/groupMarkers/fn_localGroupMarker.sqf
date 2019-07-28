@@ -28,6 +28,10 @@ _mkrName = format ["mkr_%1",_grpName];
 
 // WAIT FOR GROUP TO EXIST IN-MISSION
 // We wait for the group to have members before creating the marker.
+//
+// NOTE: Since Arma 1.93.145618, the waitUntil loop must be explicitly ended
+// with a bool expression (the third isNil below). See the warning at the top of:
+// https://community.bistudio.com/wiki/waitUntil
 
 if (isNil "_grp") then
 {
@@ -38,6 +42,7 @@ if (isNil "_grp") then
 		{
 			count units %1 > 0
 		};
+		!isNil '%1';
 		};
 		_grp = %1;
 
